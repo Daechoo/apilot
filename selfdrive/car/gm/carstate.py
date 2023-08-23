@@ -134,6 +134,7 @@ class CarState(CarStateBase):
       ret.cruiseState.enabled = pt_cp.vl["ECMCruiseControl"]["CruiseActive"] != 0
 
     # TODO: APILOT
+    ret.accFaulted = False ## for Test...
     ret.cruiseGap = 1
     #ret.tpms =
     ret.vCluRatio = 1.0
