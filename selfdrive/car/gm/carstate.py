@@ -30,6 +30,9 @@ class CarState(CarStateBase):
     self.single_pedal_mode = False
     self.pedal_steady = 0.
     self.distance_button_pressed = False
+
+    self.totalDistance = 0.0
+
   def update(self, pt_cp, cam_cp, loopback_cp):
     ret = car.CarState.new_message()
 
@@ -141,9 +144,10 @@ class CarState(CarStateBase):
     #ret.driverOverride
     #ret.chargeMeter
     #ret.motorRpm
-    #ret.toatlDistance
-    #ret.speedLimit
-    #ret.speedLimitDistance
+    self.totalDistance += ret.vEgo * DT_CTRL # 후진할때는?
+    ret.totalDistance = self.totalDistance
+    ret.speedLimit = 0
+    ret.speedLimitDistance = 0
     if ret.cruiseState.available:
       ret.cruiseState.pcmMode = True
     else:
